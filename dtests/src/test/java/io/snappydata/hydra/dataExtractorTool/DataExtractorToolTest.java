@@ -109,20 +109,20 @@ public class DataExtractorToolTest extends SnappyTest {
 
   public void startClusterInRecoveryMode() {
     Log.getLogWriter().info("SP: Inside startClusterInRecoveryMode ");
-    boolean isSecurity = SnappySecurityPrms.getIsSecurity();
+      boolean isSecurity =  true ;//SnappySecurityPrms.getIsSecurity();
     try {
       File log = new File(".");
       String dest = log.getCanonicalPath() + File.separator + "RecoveryModeCluster.log";
       Log.getLogWriter().info("The destination file is " + dest);
       File logFile = new File(dest);
       String snappyPath = SnappyCDCPrms.getSnappyFileLoc();
-      if(isSecurity) {
+   //   if(isSecurity) {
         ProcessBuilder pbClustStart = new ProcessBuilder(snappyPath + "/sbin/snappy-start-all.sh --recover");
         Long startTime1 = System.currentTimeMillis();
         snappyTest.executeProcess(pbClustStart, logFile);
         Long totalTime1 = (System.currentTimeMillis() - startTime1);
         Log.getLogWriter().info("The cluster took " + totalTime1 + " ms to start in recovery mode");
-      }
+   //   }
     }
     catch(IOException io){
       Log.getLogWriter().info("Caught ioException in  startClusterIn Recovery Mode method " + io.getMessage());
